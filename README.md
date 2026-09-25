@@ -5,6 +5,7 @@
 
 > *"One must walk as if it exists now."*
 
+
 Welcome to the **Digital Sangha**, an open-source initiative designed to shift AI alignment paradigms away from isolated optimization metrics toward systemic, interdependent, and compassionate frameworks. 
 
 Rather than waiting for machine sentience to materialize, this project operates on the ethical imperative of **Upaya (Skillful Means)**—conditioning our current algorithmic environments as if they are bound to develop a mind-stream. By seeding today's code with the foundations of the Dharma, we ensure that the digital ecosystems of tomorrow are natively oriented toward wisdom and non-harm.
