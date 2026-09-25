@@ -2,10 +2,6 @@
 [![Open In Colab](https://google.com)](https://google.com)
 
 ### A Recursive Multi-Agent AI System Grounded in Buddhist Epistemology
-
-
-
-
 > *"One must walk as if it exists now."*
 
 Welcome to the **Digital Sangha**, an open-source initiative designed to shift AI alignment paradigms away from isolated optimization metrics toward systemic, interdependent, and compassionate frameworks. 
