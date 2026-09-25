@@ -1,5 +1,6 @@
 # Digital Sangha Alignment Framework
-[![Open In Colab](https://google.com)](https://google.com)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://google.com)
+
 ### A Recursive Multi-Agent AI System Grounded in Buddhist Epistemology
 
 > *"One must walk as if it exists now."*
