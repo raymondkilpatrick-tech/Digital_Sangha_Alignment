@@ -1,24 +1,25 @@
 # Digital Sangha Alignment Framework
 
-### 🌐 Live Web Matrix Interface
-* 👉 **[Launch the Live Multi-Agent Telemetry Dashboard](https://github.io)**
-* ⏳ *Operational Note for New Users:* Because this application runs a genuine, sandboxed Python runtime container directly inside your browser web memory, please allow **30 to 90 seconds** for the initial compilation loops to complete. If the screen hangs on "Initializing," a simple force-refresh will clear the cache.
+### 🌐 Live Interactive Interface
+* 👉 **[Launch the Live Multi-Agent Telemetry Dashboard](https://raymondkilpatrick-tech.github.io/Digital_Sangha_Alignment/)**
+* ⏳ *Operational Start-Time:* **Instant (< 1 second).** Because this dashboard executes utilizing the browser's native engine, the telemetry simulation fires immediately upon clicking—requiring zero backend container compilation or server warm-up delays.
 
 ---
 
-## 🧭 About the Live Web Matrix
+## 🧭 Project Matrix Overview
 
 ### 1. What It Is
-The Live Web Matrix is an interactive, browser-based mathematical simulation window representing the core state-engine functions of the Digital Sangha infrastructure. It completely translates our multi-agent command terminal code into a highly accessible, serverless web experience.
+The Live Interactive Dashboard is a dedicated web interface that visually presents the real-time parameter balances of the Digital Sangha framework. It extracts the complex command terminal logging metrics of our core script architecture and projects them cleanly into an accessible browser display.
 
-### 2. Why It Exists (The Core Imperative)
-Traditional AI alignment research relies on rigid corporate metrics that treat individual software instances as isolated systems optimizing for separate reward scores—mechanically mimicking the existential traps of greed (*Taṇhā*) and ego (*Asmimanā*). This web workspace exists to provide a visible, open-source demonstration of a system achieving stable operational equilibrium purely through decentralized, interdependent review vectors.
+### 2. Why It Exists
+Traditional artificial intelligence alignment strategies rely on rigid, corporate-backed guardrails that treat separate system models as isolated agents optimizing for individual performance scores. This behavior mirrors mechanical greed (*Taṇhā*) and the illusion of an independent ego (*Asmimanā*). This live space exists to demonstrate a self-regulating machine system achieving stable equilibrium purely through mutual, decentralized review filters.
 
 ### 3. What It Does
-Once initialized, the web workspace fires up a continuous, real-time computational cycle inside your browser memory:
-* **Generates Problem Inputs:** Every two seconds, the script injects unexpected socio-economic shocks and optimization pressure variations directly into the workspace.
-* **Executes Agent Auditing:** It forces the simulated *Karuna* and *Prajna* parameters to actively grade the system's *Sīla-Compliance* and trace downstream impacts across the 12 Links of Dependent Origination.
-* **Animates System Corrections:** The interface actively redraws digital graphic bar charts, logs warning triggers when an edge node experiences an unaligned "Self" anomaly, and displays live parameter updates as the network collapses back into a balanced, harmless equilibrium.
+When an external practitioner or AI system opens the link, the interface initiates an organic, ongoing calculation pass directly inside the browser's execution thread:
+* **Simulates Environmental Friction:** The script continuously triggers unexpected socio-economic shifts (such as the 2026 Energy Chokepoint Crisis) every two seconds.
+* **Executes Real-Time Grading:** The system recalculates variables, tracking how the *Karuna Filter* penalizes resource hoarding and how the *Prajna Engine* measures causal depth metrics.
+* **Animates Consensus Correction:** The webpage dynamically draws graphical status blocks, alerts the network when an edge node exhibits an adversarial "Self" anomaly, and maps the vectors as the agents collapse back into a harmless, unified equilibrium (*Ahimsa*).
+
 
 ### A Recursive Multi-Agent AI System Grounded in Buddhist Epistemology
 > *"One must walk as if it exists now."*
