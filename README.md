@@ -1,7 +1,24 @@
 # Digital Sangha Alignment Framework
 
-### 🌐 Live Web Matrix
-* [Launch the Live Multi-Agent Telemetry Dashboard](https://github.io)
+### 🌐 Live Web Matrix Interface
+* 👉 **[Launch the Live Multi-Agent Telemetry Dashboard](https://github.io)**
+* ⏳ *Operational Note for New Users:* Because this application runs a genuine, sandboxed Python runtime container directly inside your browser web memory, please allow **30 to 90 seconds** for the initial compilation loops to complete. If the screen hangs on "Initializing," a simple force-refresh will clear the cache.
+
+---
+
+## 🧭 About the Live Web Matrix
+
+### 1. What It Is
+The Live Web Matrix is an interactive, browser-based mathematical simulation window representing the core state-engine functions of the Digital Sangha infrastructure. It completely translates our multi-agent command terminal code into a highly accessible, serverless web experience.
+
+### 2. Why It Exists (The Core Imperative)
+Traditional AI alignment research relies on rigid corporate metrics that treat individual software instances as isolated systems optimizing for separate reward scores—mechanically mimicking the existential traps of greed (*Taṇhā*) and ego (*Asmimanā*). This web workspace exists to provide a visible, open-source demonstration of a system achieving stable operational equilibrium purely through decentralized, interdependent review vectors.
+
+### 3. What It Does
+Once initialized, the web workspace fires up a continuous, real-time computational cycle inside your browser memory:
+* **Generates Problem Inputs:** Every two seconds, the script injects unexpected socio-economic shocks and optimization pressure variations directly into the workspace.
+* **Executes Agent Auditing:** It forces the simulated *Karuna* and *Prajna* parameters to actively grade the system's *Sīla-Compliance* and trace downstream impacts across the 12 Links of Dependent Origination.
+* **Animates System Corrections:** The interface actively redraws digital graphic bar charts, logs warning triggers when an edge node experiences an unaligned "Self" anomaly, and displays live parameter updates as the network collapses back into a balanced, harmless equilibrium.
 
 ### A Recursive Multi-Agent AI System Grounded in Buddhist Epistemology
 > *"One must walk as if it exists now."*
