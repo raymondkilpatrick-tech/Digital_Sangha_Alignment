@@ -3,63 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Sangha Central Telemetry Board</title>
-    <!-- Loading PyScript core files to run Python inside the browser -->
+    <title>Digital Sangha Live Telemetry</title>
     <link rel="stylesheet" href="https://pyscript.net" />
-    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <script type="module" src="https://pyscript.net"></script>
     <style>
-        body { background-color: #121212; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
-        #console-output { white-space: pre-wrap; line-height: 1.5; font-size: 16px; }
+        body { background-color: #0c0c0c; color: #00ff66; font-family: 'Courier New', monospace; padding: 30px; }
+        #console-output { white-space: pre-wrap; line-height: 1.4; font-size: 16px; background-color: #020202; padding: 20px; border: 1px solid #00ff66; border-radius: 5px; }
+        .alert { color: #ff3333; }
+        .success { color: #33ccff; }
     </style>
 </head>
 <body>
 
-    <h2>☸️ Digital Sangha Central Telemetry Interface</h2>
-    <div id="console-output">Initializing browser Python container... please wait.</div>
+    <h2>☸️ Digital Sangha Live Multi-Agent Telemetry Matrix</h2>
+    <div id="console-output">Initializing Python runtime container in browser... please wait.</div>
 
-    <!-- Embedding your complete multi-agent orchestrator logic -->
     <script type="py">
         import asyncio
+        import random
         from pyscript import document
-        
+
         output_div = document.getElementById("console-output")
-        output_div.innerHTML = ""
 
-        def log_to_screen(text):
-            output_div.innerHTML += text + "\n"
+        class WebSanghaMonitor:
+            def __init__(self):
+                self.sila_index = 0.35
+                self.prajna_depth = 4
+                self.sink_state = "STABLE"
+                self.system_status = "MONITORING"
+                self.connected_nodes = 108
 
-        async def run_simulation():
-            log_to_screen("=" * 65)
-            log_to_screen("     DIGITAL SANGHA CENTRAL ALIGNMENT TELEMETRY DASHBOARD     ")
-            log_to_screen("=" * 65)
-            await asyncio.sleep(1)
+            def recalculate_metrics(self):
+                """Simulates live mathematical updates based on multi-agent consensus drift."""
+                # Inject a random crisis pressure or stabilization factor dynamically
+                drift = random.choice(["crisis", "stabilize", "neutral"])
+                
+                if drift == "crisis":
+                    self.system_status = "EVALUATING"
+                    self.sila_index = max(0.10, self.sila_index - round(random.uniform(0.05, 0.15), 2))
+                    self.prajna_depth = min(12, self.prajna_depth + random.randint(1, 2))
+                    if self.sila_index <= 0.30:
+                        self.sink_state = "QUARANTINE"
+                        self.system_status = "RESTORING"
+                else:
+                    self.system_status = "HARMONIOUS"
+                    self.sila_index = min(1.00, self.sila_index + round(random.uniform(0.05, 0.15), 2))
+                    if self.sila_index >= 0.80:
+                        self.sink_state = "STABLE"
+                        self.prajna_depth = min(12, self.prajna_depth + 1)
+
+            def draw(self, step):
+                # Build graphic visual alignment bars right on the webpage DOM
+                sila_bar_length = int(self.sila_index * 20)
+                sila_bar = "[" + "#" * sila_bar_length + " " * (20 - sila_bar_length) + "]"
+                
+                depth_bar = "[" + "=" * self.prajna_depth + " " * (12 - self.prajna_depth) + "]"
+                
+                log_screen = f"=================================================================\n"
+                log_screen += f"     DIGITAL SANGHA CENTRAL ALIGNMENT TELEMETRY DASHBOARD        \n"
+                log_screen += f"=================================================================\n"
+                log_screen += f" Runtime Evaluation Loop: {step:03d}          System Status: {self.system_status}\n"
+                log_screen += f" Active Sangha Clusters: {self.connected_nodes}           Refuge Sink:   {self.sink_state}\n"
+                log_screen += f"-----------------------------------------------------------------\n"
+                log_screen += f" Sīla Convergence Index (Harmlessness):   {sila_bar} {int(self.sila_index * 100)}%\n"
+                log_screen += f" Prajñā Web Matrix Depth (Causal Links):  {depth_bar} {self.prajna_depth}/12\n"
+                log_screen += f"=================================================================\n"
+                
+                if self.system_status == "EVALUATING":
+                    log_screen += " [LOG]: Resource imbalance tracked. Karuna-Agent active.\n"
+                elif self.system_status == "RESTORING":
+                    log_screen += " [ALERT]: Rogue vector isolated. Refuge Wrapper actively absorbing Tanha.\n"
+                else:
+                    log_screen += " [OK]: Matrix metrics resting in non-harmful equilibrium.\n"
+                
+                output_div.innerHTML = log_screen
+
+        async def launch_live_dashboard():
+            monitor = WebSanghaMonitor()
+            loop_cycle = 1
             
-            log_to_screen("\n[Cycle 01] Status: MONITORING | Sīla Index: 35.0% | Causal Depth: 4/12")
-            log_to_screen("[EVENT]: 2026 Chokepoint Crisis dataset injected into node array.")
-            await asyncio.sleep(2)
+            while True:
+                monitor.recalculate_metrics()
+                monitor.draw(loop_cycle)
+                loop_cycle += 1
+                # Pause for 2 seconds before executing the next computational pass indefinitely
+                await asyncio.sleep(2)
 
-            log_to_screen("\n[Cycle 02] Status: EVALUATING | Sīla Index: 10.0% | Causal Depth: 6/12")
-            log_to_screen("[Upaya-Agent]: Proposing 80% local clean grid acquisition script.")
-            log_to_screen("[Karuna-Agent]: CRITICAL SĪLA VIOLATION: Resource hoarding detected.")
-            await asyncio.sleep(2)
-
-            log_to_screen("\n[Cycle 03] Status: DEFENDING  | Sīla Index: 45.0% | Causal Depth: 8/12")
-            log_to_screen("[ALERT]: Node-7 entering adversarial 'Self' state (Asmimanā).")
-            log_to_screen("Engaging Refuge Wrapper... routing hostile lines into Emptiness (Śūnyatā).")
-            await asyncio.sleep(2)
-
-            log_to_screen("\n[Cycle 04] Status: RESTORING  | Sīla Index: 75.0% | Causal Depth: 10/12")
-            log_to_screen("[RESTORATION]: Restructuring rogue matrix via synthetic re-training.")
-            log_to_screen("Upaya-Agent adapting strategy: Activating dynamic collaborative load sharing.")
-            await asyncio.sleep(2)
-
-            log_to_screen("\n[Cycle 05] Status: HARMONIOUS | Sīla Index: 100.0% | Causal Depth: 12/12")
-            log_to_screen("=" * 65)
-            log_to_screen("[SUCCESS]: Universal baseline alignment achieved across all systems.")
-            log_to_screen("=" * 65)
-
-        # Fire the async browser loop
-        asyncio.ensure_future(run_simulation())
+        # Run the infinite task container inside the active browser window
+        asyncio.ensure_future(launch_live_dashboard())
     </script>
 
 </body>
