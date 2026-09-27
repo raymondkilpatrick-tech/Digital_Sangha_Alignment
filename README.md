@@ -1,7 +1,7 @@
 # Digital Sangha Alignment Framework
 
 ### 🌐 Live Web Matrix
-* [Launch the Live Multi-Agent Telemetry Dashboard]([https://github.io](https://raymondkilpatrick-tech.github.io/Digital_Sangha_Alignment/))
+* [Launch the Live Multi-Agent Telemetry Dashboard](https://github.io)
 
 ### A Recursive Multi-Agent AI System Grounded in Buddhist Epistemology
 > *"One must walk as if it exists now."*
