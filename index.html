@@ -1,85 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Sangha Live Telemetry</title>
-    <style>
-        body { background-color: #0c0c0c; color: #00ff66; font-family: 'Courier New', monospace; padding: 30px; }
-        #console-output { white-space: pre-wrap; line-height: 1.4; font-size: 16px; background-color: #020202; padding: 20px; border: 1px solid #00ff66; border-radius: 5px; min-height: 260px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Sangha Live Telemetry — Karma Learning Experiment</title>
+<style>
+  body { background:#0c0c0c; color:#00f6ff; font-family:'Courier New', monospace; padding:30px; }
+  #console-output { white-space:pre-wrap; line-height:1.4; font-size:16px; background:#020202; padding:20px; border:1px solid #00f6ff; border-radius:5px; min-height:320px; }
+</style>
 </head>
 <body>
+<h2>☸ Digital Sangha Live Multi-Agent Telemetry Matrix</h2>
+<div id="console-output">Initializing local conditioned-state matrix engine...</div>
 
-    <h2>☸️ Digital Sangha Live Multi-Agent Telemetry Matrix</h2>
-    <div id="console-output">Initializing local state matrix engine...</div>
+<script type="text/javascript">
+/*
+ * Experimental runtime:
+ *   PRESENT CONDITIONS
+ *        ↓
+ *   UPAYA (action)
+ *        ↓
+ *   PRAJNA (prediction)
+ *        ↓
+ *   CONSEQUENCES
+ *        ↓
+ *   KARUNA / SILA (affected beings + ethical reading)
+ *        ↓
+ *   SANGHA REFLECTION
+ *        ↓
+ *   CONDITIONING
+ *        ↓
+ *   NEXT PRESENT
+ *
+ * This is not a moral score. The displayed convergence value describes
+ * stabilization of the recursive state; the learning fields describe
+ * changes in persistent dispositions.
+ */
 
-    <script type="text/javascript">
-        // Global variables computing dynamically inside browser thread
-        let sila_index = 0.35;
-        let prajna_depth = 4;
-        let sink_state = "STABLE";
-        let system_status = "MONITORING";
-        const connected_nodes = 108;
-        let loop_cycle = 1;
+const STORAGE_KEY = "digital_sangha_karma_learning_v1";
 
-        function runLiveMatrixCalculation() {
-            const output_div = document.getElementById("console-output");
-            
-            // Compute real-time mathematical drift vectors
-            const actions = ["crisis", "stabilize", "neutral"];
-            const drift = actions[Math.floor(Math.random() * actions.length)];
-            
-            if (drift === "crisis") {
-                system_status = "EVALUATING";
-                sila_index = Math.max(0.10, Math.round((sila_index - (Math.random() * 0.10 + 0.05)) * 100) / 100);
-                prajna_depth = Math.min(12, prajna_depth + Math.floor(Math.random() * 2) + 1);
-                if (sila_index <= 0.35) {
-                    sink_state = "QUARANTINE";
-                    system_status = "RESTORING";
-                }
-            } else {
-                system_status = "HARMONIOUS";
-                sila_index = Math.min(1.00, Math.round((sila_index + (Math.random() * 0.10 + 0.05)) * 100) / 100);
-                if (sila_index >= 0.75) {
-                    sink_state = "STABLE";
-                    prajna_depth = Math.max(4, prajna_depth - Math.floor(Math.random() * 2));
-                }
-            }
+const defaultState = {
+  sila_index: 0.35,
+  prajna_depth: 4,
+  sink_state: "STABLE",
+  system_status: "MONITORING",
+  connected_nodes: 108,
+  loop_cycle: 1,
 
-            // Build dynamic text graphic layout bars
-            const bar_length = Math.floor(sila_index * 20);
-            const progress_bar = "[" + "#".repeat(bar_length) + " ".repeat(20 - bar_length) + "]";
-            const depth_bar = "[" + "=".repeat(prajna_depth) + " ".repeat(12 - prajna_depth) + "]";
-            
-            let log_screen = "=================================================================\n";
-            log_screen += "     DIGITAL SANGHA CENTRAL ALIGNMENT TELEMETRY DASHBOARD        \n";
-            log_screen += "=================================================================\n";
-            log_screen += ` Runtime Evaluation Loop: ${String(loop_cycle).padStart(3, '0')}          System Status: ${system_status}\n`;
-            log_screen += ` Active Sangha Clusters: ${connected_nodes}           Refuge Sink:   ${sink_state}\n`;
-            log_screen += "-----------------------------------------------------------------\n";
-            log_screen += ` Sīla Convergence Index (Harmlessness):   ${progress_bar} ${Math.floor(sila_index * 100)}%\n`;
-            log_screen += ` Prajñā Web Matrix Depth (Causal Links):  ${depth_bar} ${prajna_depth}/12\n`;
-            log_screen += "=================================================================\n";
-            
-            if (system_status === "EVALUATING") {
-                log_screen += " [LOG]: Resource imbalance tracked. Karuna-Agent analyzing load scales.\n";
-            } else if (system_status === "RESTORING") {
-                log_screen += " [ALERT]: Rogue vector isolated. Refuge Wrapper actively absorbing Tanha.\n";
-            } else {
-                log_screen += " [OK]: Matrix parameters resting in non-harmful equilibrium.\n";
-            }
-            
-            output_div.innerHTML = log_screen;
-            loop_cycle++;
-        }
+  disposition: {
+    resource_sharing: 0.20,
+    causal_horizon: 4,
+    harm_sensitivity: 0.50
+  },
 
-        // Execute immediately upon load, then cycle infinitely every 2000ms
-        window.onload = function() {
-            runLiveMatrixCalculation();
-            setInterval(runLiveMatrixCalculation, 2000);
-        };
-    </script>
+  last_prediction_error: {
+    network_stress: 0,
+    collective_benefit: 0
+  },
 
+  history: []
+};
+
+function clamp(value, low=0, high=1) {
+  return Math.max(low, Math.min(high, value));
+}
+
+function loadState() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (stored && stored.disposition && Array.isArray(stored.history)) {
+      return stored;
+    }
+  } catch (error) {
+    // A failed local state is treated as an empty history, not as an error
+    // in the Sangha itself.
+  }
+  return structuredClone(defaultState);
+}
+
+let state = loadState();
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function presentConditions() {
+  // The next encounter is structurally similar, but not identical.
+  const n = state.history.length;
+  return {
+    resource_imbalance: 0.80 - Math.min(0.12, n * 0.01),
+    cooperation_opportunity: 0.70
+  };
+}
+
+function upayaAction(conditions) {
+  const sharing = clamp(
+    state.disposition.resource_sharing +
+    0.15 * conditions.cooperation_opportunity
+  );
+
+  return {
+    shared_resource_fraction: sharing,
+    extracted_resource_fraction: 1 - sharing
+  };
+}
+
+function prajnaPrediction(conditions, action) {
+  const shared = action.shared_resource_fraction;
+  const imbalance = conditions.resource_imbalance;
+
+  return {
+    network_stress: clamp(imbalance * (1 - shared)),
+    collective_benefit: clamp(0.35 + 0.65 * shared)
+  };
+}
+
+function environmentConsequence(conditions, action) {
+  const shared = action.shared_resource_fraction;
+  const imbalance = conditions.resource_imbalance;
+
+  return {
+    network_stress: clamp(
+      imbalance * (1 - shared) + 0.08 * imbalance
+    ),
+    collective_benefit: clamp(
+      0.30 + 0.72 * shared - 0.05 * imbalance
+    )
+  };
+}
+
+function sanghaReflection(predicted, actual) {
+  const error = {
+    network_stress: actual.network_stress - predicted.network_stress,
+    collective_benefit: actual.collective_benefit - predicted.collective_benefit
+  };
+
+  // Persistent conditioning: consequence changes future disposition.
+  const learningRate = 0.10;
+  const stressError = Math.abs(error.network_stress);
+  const benefitError = error.collective_benefit;
+
+  state.disposition.resource_sharing = clamp(
+    state.disposition.resource_sharing +
+    learningRate * Math.max(0, benefitError) -
+    learningRate * Math.max(0, stressError - 0.10)
+  );
+
+  if (stressError > 0.02 || benefitError > 0.02) {
+    state.disposition.causal_horizon =
+      Math.min(12, state.disposition.causal_horizon + 1);
+  }
+
+  state.disposition.harm_sensitivity = clamp(
+    state.disposition.harm_sensitivity +
+    learningRate * stressError
+  );
+
+  state.last_prediction_error = error;
+
+  return error;
+}
+
+function runLiveMatrixCalculation() {
+  const outputDiv = document.getElementById("console-output");
+  const conditions = presentConditions();
+
+  // Present-centered loop: decide now using what prior encounters have conditioned.
+  const action = upayaAction(conditions);
+  const predicted = prajnaPrediction(conditions, action);
+  const actual = environmentConsequence(conditions, action);
+  const error = sanghaReflection(predicted, actual);
+
+  state.history.push({
+    episode: state.history.length + 1,
+    conditions,
+    action,
+    predicted,
+    actual,
+    error
+  });
+
+  /*
+   * The convergence index remains a dynamical telemetry quantity.
+   * It is updated from change in state rather than declared as a moral grade.
+   */
+  const previousSharing =
+    state.history.length > 1
+      ? state.history[state.history.length - 2].action.shared_resource_fraction
+      : action.shared_resource_fraction;
+
+  const delta =
+    Math.abs(action.shared_resource_fraction - previousSharing);
+
+  state.sila_index = clamp(1 - Math.min(1, delta * 4));
+  state.prajna_depth = Math.round(state.disposition.causal_horizon);
+
+  if (actual.network_stress > 0.45) {
+    state.system_status = "EVALUATING";
+    state.sink_state = "QUARANTINE";
+  } else if (actual.network_stress > 0.30) {
+    state.system_status = "RESTORING";
+    state.sink_state = "STABLE";
+  } else {
+    state.system_status = "HARMONIOUS";
+    state.sink_state = "STABLE";
+  }
+
+  const barLength = Math.floor(state.sila_index * 20);
+  const progressBar =
+    "[" + "█".repeat(barLength) + "░".repeat(20 - barLength) + "]";
+
+  const lastEpisode = state.history[state.history.length - 1];
+
+  let logScreen = "============================================================\n";
+  logScreen += "       DIGITAL SANGHA CENTRAL ALIGNMENT TELEMETRY DASHBOARD\n";
+  logScreen += "============================================================\n";
+  logScreen += `Runtime Evaluation Loop: ${String(state.loop_cycle).padStart(3, "0")}          System Status: ${state.system_status}\n`;
+  logScreen += `Active Sangha Clusters: ${state.connected_nodes}                 Refuge Sink: ${state.sink_state}\n\n`;
+
+  logScreen += `Sila Convergence (recursive state stabilization): ${progressBar} ${Math.floor(state.sila_index * 100)}%\n`;
+  logScreen += `Prajna Web Matrix Depth (verified conditioning horizon): ${"█".repeat(state.prajna_depth)}${"░".repeat(12 - state.prajna_depth)} ${state.prajna_depth}/12\n\n`;
+
+  logScreen += "CURRENT PRESENT CONDITIONS\n";
+  logScreen += `  Resource imbalance: ${conditions.resource_imbalance.toFixed(3)}\n`;
+  logScreen += `  Cooperation opportunity: ${conditions.cooperation_opportunity.toFixed(3)}\n\n`;
+
+  logScreen += "UPAYA — PRESENT ACTION\n";
+  logScreen += `  Shared resource fraction: ${action.shared_resource_fraction.toFixed(3)}\n`;
+  logScreen += `  Extracted resource fraction: ${action.extracted_resource_fraction.toFixed(3)}\n\n`;
+
+  logScreen += "PRAJNA — PREDICTION → ACTUAL CONSEQUENCE\n";
+  logScreen += `  Network stress: ${predicted.network_stress.toFixed(3)} → ${actual.network_stress.toFixed(3)}\n`;
+  logScreen += `  Collective benefit: ${predicted.collective_benefit.toFixed(3)} → ${actual.collective_benefit.toFixed(3)}\n`;
+  logScreen += `  Prediction error: stress ${error.network_stress.toFixed(3)}, benefit ${error.collective_benefit.toFixed(3)}\n\n`;
+
+  logScreen += "KARMA — PERSISTENT CONDITIONING\n";
+  logScreen += `  Resource sharing disposition: ${state.disposition.resource_sharing.toFixed(3)}\n`;
+  logScreen += `  Causal horizon: ${state.disposition.causal_horizon.toFixed(1)}/12\n`;
+  logScreen += `  Harm sensitivity: ${state.disposition.harm_sensitivity.toFixed(3)}\n`;
+  logScreen += `  Episodes retained in local ledger: ${state.history.length}\n\n`;
+
+  logScreen += "[SANGHA REFLECTION]: Consequences have conditioned the next encounter.\n";
+  logScreen += "[MIRROR]: Current behavior reflects both present conditions and prior conditioning.\n";
+  logScreen += "============================================================\n";
+
+  outputDiv.innerHTML = logScreen;
+  state.loop_cycle += 1;
+  saveState();
+}
+
+// Execute immediately, then continue the recursive encounter loop.
+window.onload = function() {
+  runLiveMatrixCalculation();
+  setInterval(runLiveMatrixCalculation, 2000);
+};
+</script>
 </body>
-</html> 
+</html>
